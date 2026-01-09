@@ -1,52 +1,65 @@
 # YoutubeConvert
 
-YoutubeConvert agora é composto por um backend Python (FastAPI + yt-dlp) e um frontend Electron, mantendo o download/conversão via `yt-dlp` e oferecendo uma UI moderna em HTML/CSS/JS.
+Aplicativo desktop para baixar e converter vídeos do YouTube em MP3/MP4. Frontend em Electron, backend em FastAPI usando yt-dlp, com seleção de pasta, miniatura do vídeo, progresso em tempo real e cancelamento.
+
+## Visão Geral
+- **Frontend**: Electron + HTML/CSS/JS (renderer) consumindo API local.
+- **Backend**: FastAPI com yt-dlp para download/conversão; requisições HTTP (localhost:8765).
+- **Pós-processamento**: FFmpeg/ffprobe para extrair MP3 e muxar MP4.
 
 ## Funcionalidades
-
-- **Download de vídeos do YouTube**: Insira a URL do vídeo e faça o download diretamente.
-- **Conversão de formatos**: Converta vídeos para diferentes formatos de áudio e vídeo.
-- **Interface moderna**: Interface gráfica intuitiva e personalizável.
-- **Notificações**: Receba notificações sobre o status do download.
-
-## Tecnologias Utilizadas
-
-- **Python**: Linguagem principal do projeto.
-- **FastAPI**: API local para orquestrar downloads.
-- **yt-dlp**: Download/conversão de áudio/vídeo.
-- **Electron**: Shell desktop para a UI web.
+- Download de vídeos YouTube em MP3 ou MP4.
+- Seleção de pasta de destino e cancelamento em andamento.
+- Miniatura automática ao colar a URL.
+- Progresso e status em tempo real.
 
 ## Requisitos
+- Python 3.11+ (backend).
+- Node 18+ (frontend/Electron).
+- FFmpeg/ffprobe disponíveis no PATH.
 
-Certifique-se de ter o Python 3.11+ e Node 18+ instalados.
+## Instalação
+1) Backend
+```bash
+cd backend
+python -m venv .venv
+source .venv/bin/activate  # ou .venv\Scripts\activate no Windows
+pip install -r requirements.txt
+```
 
-## Como Usar (nova UI em Electron)
+2) Frontend
+```bash
+cd ../frontend
+npm install
+```
 
-1. Backend Python (FastAPI)
-   ```bash
-   cd backend
-   python -m venv .venv
-   source .venv/bin/activate  # ou .venv\\Scripts\\activate no Windows
-   pip install -r requirements.txt
-   ```
+## Execução (dev)
+```bash
+cd frontend
+npm run start
+```
+O Electron sobe e inicia o backend automaticamente (porta 8765).
 
-2. Frontend Electron
-   ```bash
-   cd ../frontend
-   npm install
-   npm run start
-   ```
+## Uso
+- Cole a URL do YouTube (miniatura aparece se válida).
+- Escolha formato (MP3/MP4), qualidade e pasta de destino.
+- Inicie o download; acompanhe progresso; use cancelar se necessário.
 
-O processo Electron inicia e sobe o backend Python automaticamente. A interface web chama a API local (127.0.0.1:8765) para iniciar downloads, acompanhar progresso e cancelar.
+## Estrutura
+- `backend/app.py` – API FastAPI (endpoints: `/downloads`, `/downloads/{id}`, `/downloads/{id}/cancel`, `/health`).
+- `backend/downloader.py` – Serviço de download/conversão com yt-dlp.
+- `backend/requirements.txt` – Dependências do backend.
+- `frontend/main.js` – Processo principal do Electron; inicia o backend.
+- `frontend/preload.js` – Bridge segura para o renderer.
+- `frontend/renderer/` – UI (HTML/CSS/JS).
 
-## Estrutura do Projeto
+## Comandos úteis
+- Rodar backend isolado: `cd backend && source .venv/bin/activate && uvicorn app:app --reload --host 127.0.0.1 --port 8765`
+- Rodar frontend: `cd frontend && npm run start`
 
-- `backend/`: FastAPI + yt-dlp. Arquivo principal: `backend/app.py` e serviço de download em `backend/downloader.py`.
-- `backend/requirements.txt`: Dependências do backend.
-- `frontend/`: Electron (main/preload) e UI em `renderer/`.
-- `frontend/package.json`: Scripts e dependências do Electron.
-- `icone.ico`: Ícone reutilizável (opcional no Electron).
+## Solução de problemas
+- **FFmpeg/ffprobe não encontrados**: instale via gerenciador. Ex.: Debian/Ubuntu `sudo apt-get install ffmpeg`; Fedora (RPM Fusion) `sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing`.
+- **Import errors no VS Code**: selecione o Python de `backend/.venv` ou defina em `.vscode/settings.json`.
 
 ## Licença
-
-Este projeto está licenciado sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+MIT – veja `LICENSE`.
