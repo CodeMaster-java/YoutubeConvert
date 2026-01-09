@@ -40,6 +40,24 @@ npm run start
 ```
 O Electron sobe e inicia o backend automaticamente (porta 8765).
 
+## Empacotamento
+Pré-requisitos: Node 18+, dependências já instaladas (`npm install`), FFmpeg no PATH. Em Linux, instale `libxcrypt-compat` para o build RPM.
+
+### Fedora (RPM)
+```bash
+cd frontend
+npm run dist -- --linux rpm
+```
+Saída: `frontend/dist/youtubeconvert-electron-0.1.0.x86_64.rpm`.
+
+### Windows (.exe)
+Em um host Windows (ou Linux com Wine + Mono):
+```bash
+cd frontend
+npm run dist -- --win --x64
+```
+Saída: `frontend/dist/YouTubeConverter-Setup-0.1.0.exe`.
+
 ## Uso
 - Cole a URL do YouTube (miniatura aparece se válida).
 - Escolha formato (MP3/MP4), qualidade e pasta de destino.

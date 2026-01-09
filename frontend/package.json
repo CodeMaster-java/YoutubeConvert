@@ -1,13 +1,49 @@
 {
   "name": "youtubeconvert-electron",
   "version": "0.1.0",
+  "description": "YouTube Converter desktop app",
   "main": "main.js",
+  "author": {
+    "name": "CodeMaster",
+    "email": "robsonjosecorreacarvalho@gmail.com"
+  },
+  "homepage": "https://github.com/CodeMaster/YouTubeConvert",
   "scripts": {
     "start": "electron .",
-    "lint": "echo 'no lint configured'"
+    "lint": "echo 'no lint configured'",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.youtubeconvert.app",
+    "productName": "YouTube Converter",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "icon": "assets/icon.png",
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "../backend/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "../backend",
+        "to": "backend"
+      }
+    ],
+    "linux": {
+      "target": "rpm",
+      "category": "AudioVideo"
+    },
+    "win": {
+      "target": "nsis",
+      "artifactName": "YouTubeConverter-Setup-${version}.exe"
+    }
   },
   "devDependencies": {
-    "electron": "^30.0.0"
-  },
-  "dependencies": {}
+    "electron": "^30.0.0",
+    "electron-builder": "^26.4.0"
+  }
 }
