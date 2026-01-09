@@ -1,6 +1,6 @@
 # YoutubeConvert
 
-YoutubeConvert é uma aplicação de desktop que permite baixar e converter vídeos do YouTube de forma simples e eficiente. Ele possui uma interface gráfica amigável construída com `customtkinter`.
+YoutubeConvert agora é composto por um backend Python (FastAPI + yt-dlp) e um frontend Electron, mantendo o download/conversão via `yt-dlp` e oferecendo uma UI moderna em HTML/CSS/JS.
 
 ## Funcionalidades
 
@@ -12,42 +12,40 @@ YoutubeConvert é uma aplicação de desktop que permite baixar e converter víd
 ## Tecnologias Utilizadas
 
 - **Python**: Linguagem principal do projeto.
-- **customtkinter**: Para a interface gráfica.
-- **pytube**: Para manipulação e download de vídeos do YouTube.
-- **pydub**: Para conversão de arquivos de áudio.
-- **yt-dlp**: Para suporte avançado a downloads.
+- **FastAPI**: API local para orquestrar downloads.
+- **yt-dlp**: Download/conversão de áudio/vídeo.
+- **Electron**: Shell desktop para a UI web.
 
 ## Requisitos
 
-Certifique-se de ter o Python 3.11 ou superior instalado. As dependências podem ser instaladas com o seguinte comando:
+Certifique-se de ter o Python 3.11+ e Node 18+ instalados.
 
-```bash
-pip install -r requirements.txt
-```
+## Como Usar (nova UI em Electron)
 
-## Como Usar
-
-1. Clone este repositório:
+1. Backend Python (FastAPI)
    ```bash
-   git clone https://github.com/sempai23w/YoutubeConvert
-   ```
-2. Instale as dependências:
-   ```bash
+   cd backend
+   python -m venv .venv
+   source .venv/bin/activate  # ou .venv\\Scripts\\activate no Windows
    pip install -r requirements.txt
    ```
-3. Execute o aplicativo:
+
+2. Frontend Electron
    ```bash
-   python main.py
+   cd ../frontend
+   npm install
+   npm run start
    ```
+
+O processo Electron inicia e sobe o backend Python automaticamente. A interface web chama a API local (127.0.0.1:8765) para iniciar downloads, acompanhar progresso e cancelar.
 
 ## Estrutura do Projeto
 
-- `main.py`: Arquivo principal para iniciar o aplicativo.
-- `gui.py`: Contém a interface gráfica do usuário.
-- `downloader.py`: Lida com o download e conversão de vídeos.
-- `requirements.txt`: Lista de dependências do projeto.
-- `settings.json`: Configurações do aplicativo.
-- `icone.ico`: Ícone do aplicativo.
+- `backend/`: FastAPI + yt-dlp. Arquivo principal: `backend/app.py` e serviço de download em `backend/downloader.py`.
+- `backend/requirements.txt`: Dependências do backend.
+- `frontend/`: Electron (main/preload) e UI em `renderer/`.
+- `frontend/package.json`: Scripts e dependências do Electron.
+- `icone.ico`: Ícone reutilizável (opcional no Electron).
 
 ## Licença
 

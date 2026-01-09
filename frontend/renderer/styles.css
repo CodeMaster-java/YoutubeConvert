@@ -1,0 +1,131 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at 20% 20%, #1f2430, #0f121a 60%);
+  color: #e8ecf2;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+}
+.app {
+  width: 720px;
+}
+header h1 {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 0.4px;
+}
+header p {
+  margin: 6px 0 20px;
+  color: #9eb0c7;
+}
+.card {
+  background: rgba(28, 32, 42, 0.9);
+  border: 1px solid #1f2a3a;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.field span {
+  font-size: 13px;
+  color: #9eb0c7;
+}
+.field input,
+.field select {
+  background: #151922;
+  color: #e8ecf2;
+  border: 1px solid #253145;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+}
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.row.tight {
+  grid-template-columns: 1fr 160px;
+}
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #cfd7e3;
+  margin: 6px 0 14px;
+}
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 6px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #1f8bff, #5a4bff);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.2s ease;
+}
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+button.ghost {
+  background: transparent;
+  border: 1px solid #2c3a50;
+  color: #cfd7e3;
+}
+.thumb {
+  margin: 10px 0;
+  border: 1px solid #1f2a3a;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0f121a;
+  max-height: 210px;
+}
+.thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.progress {
+  position: relative;
+  background: #11141d;
+  border: 1px solid #1f2a3a;
+  border-radius: 10px;
+  height: 12px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+.bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: linear-gradient(90deg, #1f8bff, #5a4bff);
+  transition: width 0.2s ease;
+}
+.status {
+  margin-top: 10px;
+  color: #9eb0c7;
+  min-height: 18px;
+  font-size: 14px;
+}
