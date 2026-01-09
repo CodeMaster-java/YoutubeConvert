@@ -7,61 +7,89 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="app">
-    <header>
-      <h1>YouTube Converter</h1>
-      <p>Frontend Electron + backend Python</p>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Electron + FastAPI + yt-dlp</p>
+        <h1>YouTube Converter</h1>
+        <p class="lede">Baixe em MP3/MP4, escolha qualidade, acompanhe progresso e cancele quando precisar.</p>
+        <div class="tags">
+          <span class="tag">FFmpeg ready</span>
+          <span class="tag">Progresso em tempo real</span>
+          <span class="tag">Playlist</span>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <span class="badge-title">Desktop</span>
+        <span class="badge-sub">Offline-first</span>
+      </div>
     </header>
 
-    <section class="card">
-      <label class="field">
-        <span>URL do YouTube</span>
-        <input id="url" type="text" placeholder="https://youtube.com/watch?v=..." />
-      </label>
+    <main class="layout">
+      <section class="panel">
+        <div class="group">
+          <label class="field">
+            <span>URL do YouTube</span>
+            <input id="url" type="text" placeholder="https://youtube.com/watch?v=..." />
+          </label>
 
-      <div class="row">
-        <label class="field small">
-          <span>Formato</span>
-          <select id="fmt">
-            <option value="mp3">MP3</option>
-            <option value="mp4">MP4</option>
-          </select>
-        </label>
-        <label class="field small">
-          <span>Qualidade</span>
-          <select id="quality">
-            <option value="128">128</option>
-            <option value="192" selected>192</option>
-            <option value="320">320</option>
-          </select>
-        </label>
-      </div>
+          <div class="row">
+            <label class="field small">
+              <span>Formato</span>
+              <select id="fmt">
+                <option value="mp3">MP3</option>
+                <option value="mp4">MP4</option>
+              </select>
+            </label>
+            <label class="field small">
+              <span>Qualidade</span>
+              <select id="quality">
+                <option value="128">128</option>
+                <option value="192" selected>192</option>
+                <option value="320">320</option>
+              </select>
+            </label>
+          </div>
 
-      <label class="field">
-        <span>Salvar em</span>
-        <div class="row tight">
-          <input id="output" type="text" placeholder="/home/user/Downloads" />
-          <button type="button" id="choose-folder" class="ghost">Escolher pasta</button>
+          <label class="field">
+            <span>Salvar em</span>
+            <div class="row tight">
+              <input id="output" type="text" placeholder="/home/user/Downloads" />
+              <button type="button" id="choose-folder" class="ghost">Escolher pasta</button>
+            </div>
+          </label>
+
+          <label class="checkbox">
+            <input type="checkbox" id="playlist" />
+            <span>Baixar playlist completa</span>
+          </label>
         </div>
-      </label>
 
-      <label class="checkbox">
-        <input type="checkbox" id="playlist" />
-        <span>Baixar playlist completa</span>
-      </label>
+        <div class="actions">
+          <button id="download">Iniciar download</button>
+          <button id="cancel" class="ghost" disabled>Cancelar</button>
+        </div>
+      </section>
 
-      <div class="thumb" id="thumb" hidden>
-        <img id="thumb-img" alt="Miniatura" />
-      </div>
+      <aside class="preview">
+        <div class="preview-header">
+          <div>
+            <p class="label">Miniatura</p>
+            <p class="hint">Preencha a URL para carregar</p>
+          </div>
+          <div class="pill">Status</div>
+        </div>
 
-      <button id="download">Iniciar download</button>
-      <button id="cancel" class="ghost" disabled>Cancelar</button>
+        <div class="thumb" id="thumb" hidden>
+          <img id="thumb-img" alt="Miniatura" />
+        </div>
 
-      <div class="progress" id="progress" hidden>
-        <div class="bar" id="bar"></div>
-      </div>
-      <div class="status" id="status"></div>
-    </section>
+        <div class="progress" id="progress" hidden>
+          <div class="bar" id="bar"></div>
+        </div>
+        <div class="status" id="status"></div>
+      </aside>
+    </main>
   </div>
 
   <script src="renderer.js"></script>

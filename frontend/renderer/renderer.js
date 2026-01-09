@@ -12,6 +12,9 @@ const statusEl = document.getElementById('status');
 const thumbWrapper = document.getElementById('thumb');
 const thumbImg = document.getElementById('thumb-img');
 
+thumbImg.loading = 'lazy';
+thumbImg.decoding = 'async';
+
 let currentId = null;
 let timer = null;
 
